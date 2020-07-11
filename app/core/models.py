@@ -23,7 +23,7 @@ class Car(models.Model):
                     (Pegout, 'Pegout'),
                     (Hundai, 'Hundai')
                     ]
-    brend = models.CharField(max_length=30, choices=BREND_CHOICE, default='Citroen', help_text='Input brend of car')
+    brend = models.CharField(max_length=10, choices=BREND_CHOICE, default='Citroen', help_text='Input brend of car')
     model = models.CharField(max_length=30, help_text='Input car model')
     type = models.CharField(max_length=30, help_text='Input car type')
     number = models.CharField(max_length=6, help_text='Input car number')
