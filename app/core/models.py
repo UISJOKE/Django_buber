@@ -19,6 +19,9 @@ class Driver(models.Model):
     car = models.ForeignKey('core.Car', on_delete=models.CASCADE)
     contact = models.CharField(max_length=20)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Car(models.Model):
     Citroen = 'Citroen'
@@ -39,4 +42,4 @@ class Car(models.Model):
     region = models.IntegerField(default=7, help_text='Input region 1-7')
 
     def __str__(self):
-        return f'{self.number}-{self.region}: {self.brend}, {self.model}'
+        return f'{self.number}-{self.region}: {self.brend} {self.model}'
