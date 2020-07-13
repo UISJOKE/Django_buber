@@ -1,26 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 
-class Passenger(models.Model):
-    name = models.OneToOneField(User, related_name='passenger_profile', on_delete=models.CASCADE)
+class User(AbstractUser):
     bio = models.CharField(max_length=50)
     avatar = models.ImageField(upload_to='ProfilePicture/')
     contact = models.CharField(max_length=20)
 
     def __str__(self):
-        return f'{self.name}'
+        return self.username
 
 
-class Driver(models.Model):
-    name = models.OneToOneField(User, related_name='Driver_profile', on_delete=models.CASCADE)
-    bio = models.CharField(max_length=50)
-    avatar = models.ImageField(upload_to='ProfilePicture/')
+class Driver(User):
     car = models.ForeignKey('core.Car', on_delete=models.CASCADE)
-    contact = models.CharField(max_length=20)
+
 
     def __str__(self):
-        return f'{self.name}'
+        return self.username
 
 
 class Car(models.Model):
