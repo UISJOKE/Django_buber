@@ -22,20 +22,20 @@ class Driver(User):
 
 
 class Car(models.Model):
-    model = models.ForeignKey('core.Model', on_delete=models.CASCADE, related_name='new_car')
-    type = models.ForeignKey('core.Type', on_delete=models.CASCADE, related_name='new_car')
-    number = models.ForeignKey('core.CarNumber', on_delete=models.CASCADE, related_name='new_car')
+    car_model = models.ForeignKey('core.Model', on_delete=models.CASCADE, related_name='new_car')
+    car_type = models.ForeignKey('core.Type', on_delete=models.CASCADE, related_name='new_car')
+    car_number = models.ForeignKey('core.CarNumber', on_delete=models.CASCADE, related_name='new_car')
 
     def __str__(self):
-        return f'{self.number}:'.upper() + f'{self.model}'
+        return f'{self.car_number}:'.upper() + f'{self.car_model}'
 
 
 class Model(models.Model):
-    brand = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
+    car_brand = models.CharField(max_length=100)
+    car_model = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'{self.brand}:{self.model}'
+        return f'{self.car_brand}:{self.car_model}'
 
 
 class Type(models.Model):
@@ -46,12 +46,12 @@ class Type(models.Model):
 
 
 class CarNumber(models.Model):
-    number = models.CharField(max_length=4)
-    series = models.CharField(max_length=2)
-    region = models.ForeignKey('core.Region', on_delete=models.CASCADE, related_name='car_numbers')
+    car_number = models.CharField(max_length=4)
+    car_nseries = models.CharField(max_length=2)
+    car_nregion = models.ForeignKey('core.Region', on_delete=models.CASCADE, related_name='car_numbers')
 
     def __str__(self):
-        return f'{self.number}' + f'{self.series}'.upper() + f'-{self.region}'
+        return f'{self.car_number}' + f'{self.car_nseries}'.upper() + f'-{self.car_nregion}'
 
 
 class Region(models.Model):
