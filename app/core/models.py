@@ -30,7 +30,6 @@ class Car(models.Model):
         return f'{self.number}:'.upper() + f'{self.model}'
 
 
-
 class Model(models.Model):
     brand = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
