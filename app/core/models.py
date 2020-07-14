@@ -12,30 +12,57 @@ class User(AbstractUser):
 
 
 class Driver(User):
-    car = models.ForeignKey('core.Car', on_delete=models.CASCADE)
+    car = models.ForeignKey('core.Car', on_delete=models.CASCADE, related_name='drivers')
 
+    class Meta:
+        verbose_name = "Driver"
 
     def __str__(self):
         return self.username
 
 
 class Car(models.Model):
-    Citroen = 'Citroen'
-    BMW = 'BMW'
-    Volkswagen = 'Volkswagen'
-    Pegout = 'Pegout'
-    Hundai = 'Hundai'
-    BREND_CHOICE = [(Citroen, 'Citroen'),
-                    (BMW, 'BMW'),
-                    (Volkswagen, 'Volkswagen'),
-                    (Pegout, 'Pegout'),
-                    (Hundai, 'Hundai')
-                    ]
-    brend = models.CharField(max_length=10, choices=BREND_CHOICE, default='Citroen', help_text='Input brend of car')
-    model = models.CharField(max_length=30, help_text='Input car model')
-    type = models.CharField(max_length=30, help_text='Input car type')
-    number = models.CharField(max_length=6, help_text='Input car number')
-    region = models.IntegerField(default=7, help_text='Input region 1-7')
+    brand = models.ForeignKey('core.Brand', on_delete=models.CASCADE, related_name='new_car')
+    model = models.ForeignKey('core.Model', on_delete=models.CASCADE, related_name='new_car')
+    type = models.ForeignKey('core.Type', on_delete=models.CASCADE, related_name='new_car')
+    number = models.ForeignKey('core.CarNumber', on_delete=models.CASCADE, related_name='new_car')
 
     def __str__(self):
-        return f'{self.number}-{self.region}: {self.brend} {self.model}'
+        return f'{self.number}:'.upper() + f' {self.brand}, {self.model}'
+
+
+class Brand(models.Model):
+    brand = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.brand
+
+
+class Model(models.Model):
+    model = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.model}'
+
+
+class Type(models.Model):
+    type = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.type
+
+
+class CarNumber(models.Model):
+    number = models.CharField(max_length=4)
+    series = models.CharField(max_length=2)
+    region = models.ForeignKey('core.Region', on_delete=models.CASCADE, related_name='car_numbers')
+
+    def __str__(self):
+        return f'{self.number}' + f'{self.series}'.upper() + f'-{self.region}'
+
+
+class Region(models.Model):
+    code = models.CharField(max_length=1)
+
+    def __str__(self):
+        return self.code
