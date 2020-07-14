@@ -22,27 +22,21 @@ class Driver(User):
 
 
 class Car(models.Model):
-    brand = models.ForeignKey('core.Brand', on_delete=models.CASCADE, related_name='new_car')
     model = models.ForeignKey('core.Model', on_delete=models.CASCADE, related_name='new_car')
     type = models.ForeignKey('core.Type', on_delete=models.CASCADE, related_name='new_car')
     number = models.ForeignKey('core.CarNumber', on_delete=models.CASCADE, related_name='new_car')
 
     def __str__(self):
-        return f'{self.number}:'.upper() + f' {self.brand}, {self.model}'
+        return f'{self.number}:'.upper() + f'{self.model}'
 
-
-class Brand(models.Model):
-    brand = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.brand
 
 
 class Model(models.Model):
+    brand = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
 
     def __str__(self):
-        return f'{self.model}'
+        return f'{self.brand}:{self.model}'
 
 
 class Type(models.Model):
