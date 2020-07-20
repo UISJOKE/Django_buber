@@ -19,6 +19,7 @@ from django.contrib import admin
 
 
 urlpatterns = [
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
-    path('core/', include('app.core.urls'))
+    path('core/', include('app.core.urls')),
 ]

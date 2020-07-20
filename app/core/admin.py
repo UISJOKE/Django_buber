@@ -9,4 +9,3 @@ admin.site.register(Car)
 admin.site.register(Model)
 admin.site.register(Type)
 admin.site.register(CarNumber)
-

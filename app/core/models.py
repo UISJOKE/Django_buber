@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     bio = models.CharField(max_length=50)
-    avatar = models.ImageField(upload_to='ProfilePicture/')
+    avatar = models.ImageField(upload_to='ProfilePicture/', default='ProfilePicture/default.jpg')
     contact = models.CharField(max_length=20)
 
     def __str__(self):
@@ -12,7 +12,7 @@ class User(AbstractUser):
 
 
 class Driver(User):
-    car = models.ForeignKey('core.Car', on_delete=models.CASCADE, related_name='drivers')
+    car = models.ForeignKey('core.Car', on_delete=models.CASCADE, related_name='drivers', default=1)
 
     class Meta:
         verbose_name = "Driver"

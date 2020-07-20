@@ -3,5 +3,5 @@ from app.core.views import MainPageView
 
 
 urlpatterns = [
-    path('', MainPageView.as_view())
+    path('', MainPageView.as_view()),
 ]
