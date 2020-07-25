@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -85,8 +85,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -107,13 +105,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "/static/"),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "/static/"),
+# ]
 
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
 AUTH_USER_MODEL = 'core.User'
-ACCOUNT_ACTIVATION_DAYS = 2
-
