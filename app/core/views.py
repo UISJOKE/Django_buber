@@ -45,4 +45,3 @@ class RegisterView(TemplateView):
                 return redirect(reverse("login"))
 
         return render(request, self.template_name)
-

@@ -455,7 +455,7 @@
 			if (typeof(tinyMCEMediaList) != "undefined" && tinyMCEMediaList.length > 0) {
 				var html = "";
 
-				html += '<select id="linklist" name="linklist" style="width: 250px" onchange="this.form.src.value=this.options[this.selectedIndex].value;Media.formToData(\'src\');">';
+				html += '<select id="linklist" name="linklist" style="width: 250px" onchange="this.form.src.value=this.options[this.selectedIndex].value;media.formToData(\'src\');">';
 				html += '<option value="">---</option>';
 
 				for (var i=0; i<tinyMCEMediaList.length; i++)
@@ -480,7 +480,7 @@
 
 			var html = "";
 
-			html += '<select id="media_type" name="media_type" onchange="Media.formToData(\'type\');">';
+			html += '<select id="media_type" name="media_type" onchange="media.formToData(\'type\');">';
 			html += option("video");
 			html += option("audio");
 			html += option("flash", "object");

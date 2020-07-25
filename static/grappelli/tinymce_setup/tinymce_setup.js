@@ -109,7 +109,7 @@ tinyMCE.init({
     // see http://www.tinymce.com/wiki.php/Plugin:advlink
     advlink_styles: 'Internal Link=internal;External Link=external',
 
-    // Media Plugin
+    // media Plugin
     // see http://www.tinymce.com/wiki.php/Plugin:media
     media_strict: true,
     

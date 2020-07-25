@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     bio = models.CharField(max_length=50, blank=True)
-    avatar = models.ImageField(upload_to='ProfilePicture/', default='ProfilePicture/default.jpg', blank=True)
+    avatar = models.ImageField(upload_to='Profile', default='Profile/default.jpg', blank=True)
     contact = models.CharField(max_length=20, blank=True)
     car = models.ManyToManyField('core.Car', related_name='drivers', blank=True)
 

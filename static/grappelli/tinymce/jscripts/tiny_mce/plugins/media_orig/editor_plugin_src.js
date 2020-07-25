@@ -12,7 +12,7 @@
 	var rootAttributes = tinymce.explode('id,name,width,height,style,align,class,hspace,vspace,bgcolor,type'), excludedAttrs = tinymce.makeMap(rootAttributes.join(',')), Node = tinymce.html.Node,
 		mediaTypes, scriptRegExp, JSON = tinymce.util.JSON, mimeTypes;
 
-	// Media types supported by this plugin
+	// media types supported by this plugin
 	mediaTypes = [
 		// Type, clsid:s, mime types, codebase
 		["Flash", "d27cdb6e-ae6d-11cf-96b8-444553540000", "application/x-shockwave-flash", "http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"],
