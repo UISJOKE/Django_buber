@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
-    # 'django.contrib.sites',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -101,13 +101,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "/static/"),
+]
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "/static/"),
-# ]
 
 INTERNAL_IPS = [
     '127.0.0.1',
@@ -116,3 +115,5 @@ AUTH_USER_MODEL = 'core.User'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+SITE_ID = 1
