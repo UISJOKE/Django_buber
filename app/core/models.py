@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from address.models import Country
+
 
 class User(AbstractUser):
     bio = models.CharField(max_length=50, blank=True)
@@ -37,23 +39,16 @@ class Type(models.Model):
 
 
 class CarNumber(models.Model):
-    RB_CODES = [
-        ('7', 'Minsk'),
-        ('6', 'Mogilev region'),
-        ('5', 'Minsk region'),
-        ('4', 'Hrodno region'),
-        ('3', 'Homel region'),
-        ('2', 'Vitebsk region'),
-        ('1', 'Brest region')
-    ]
     number = models.CharField(max_length=4)
     series = models.CharField(max_length=2)
-    region = models.CharField(max_length=20, choices=RB_CODES)
+    region = models.ForeignKey('address.Country', on_delete=models.CASCADE, related_name='cars_numbers')
 
     def save(self, *args, **kwargs):
         self.series = self.series.upper()
         return super(CarNumber, self).save(*args, **kwargs)
 
-
     def __str__(self):
-        return f'{self.number}{self.series}-{self.region}'
+        return f'{self.number}{self.series}-{self.region.code}'
+
+
+
