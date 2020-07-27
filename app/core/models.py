@@ -18,7 +18,7 @@ class Car(models.Model):
     car_number = models.ForeignKey('core.CarNumber', on_delete=models.CASCADE, related_name='new_car')
 
     def __str__(self):
-        return f'{self.car_number}:'.upper() + f'{self.car_model}({self.car_type})'
+        return f'{self.car_number}:{self.car_model}({self.car_type})'
 
 
 class Model(models.Model):
@@ -50,5 +50,10 @@ class CarNumber(models.Model):
     series = models.CharField(max_length=2)
     region = models.CharField(max_length=20, choices=RB_CODES)
 
+    def save(self, *args, **kwargs):
+        self.series = self.series.upper()
+        return super(CarNumber, self).save(*args, **kwargs)
+
+
     def __str__(self):
-        return f'{self.number}' + f'{self.series}'.upper() + f'-{self.region}'
+        return f'{self.number}{self.series}-{self.region}'

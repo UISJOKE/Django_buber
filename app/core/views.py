@@ -17,11 +17,9 @@ class MyRegisterFormView(FormView):
     template_name = "core/register.html"
 
     def form_valid(self, form):
-        form.save()
-        return super(MyRegisterFormView, self).form_valid(form)
-
-    def form_invalid(self, form):
-        return super(MyRegisterFormView, self).form_invalid(form)
+        user = form.save()
+        login(self.request, user)
+        return super().form_valid(form)
 
 
 class LoginView(TemplateView):
