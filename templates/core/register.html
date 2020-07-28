@@ -8,7 +8,10 @@
     <h1>Регистрация</h1>
    <form action="" method="post">
        {% csrf_token %}
-    {{ form.as_p }}
+       Username:<br>{{ form.username }} <br><br>
+       E-mail:<br>{{form.email}}<br><br>
+       Password:<br>{{ form.password1 }}<br><br>
+       Re-enter password:<br>{{ form.password2 }}<br><br>
     <input type="submit" value="Зарегистрировать">
     </form>
 </body>

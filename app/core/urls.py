@@ -6,5 +6,5 @@ urlpatterns = [
     path('register/', MyRegisterFormView.as_view(), name="register"),
     path('login/', LoginView.as_view(), name="login"),
     path('profile/', ProfilePage.as_view(), name="profile"),
-    path('', MainPageView.as_view()),
+    path('', MainPageView.as_view(), name='home'),
 ]

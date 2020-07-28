@@ -1,10 +1,7 @@
-from django.contrib.auth import authenticate, login
-from django.shortcuts import redirect, render
+from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
-
-from .forms import SignUpForm
-from django.views.generic import TemplateView
-from django.views.generic.edit import FormView
+from .forms import SignUpForm, LoginForm
+from django.views.generic import TemplateView, FormView
 
 
 class MainPageView(TemplateView):
@@ -13,7 +10,7 @@ class MainPageView(TemplateView):
 
 class MyRegisterFormView(FormView):
     form_class = SignUpForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('home')
     template_name = "core/register.html"
 
     def form_valid(self, form):
@@ -22,21 +19,17 @@ class MyRegisterFormView(FormView):
         return super().form_valid(form)
 
 
-class LoginView(TemplateView):
+class LoginView(FormView):
     template_name = "core/login.html"
+    form_class = LoginForm
+    success_url = reverse_lazy('profile')
 
-    def dispatch(self, request, *args, **kwargs):
-        context = {}
-        if request.method == 'POST':
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect(reverse_lazy('profile'))
-            else:
-                context['error'] = "Логин или пароль неправильные"
-        return render(request, self.template_name, context)
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(self.request, username=username, password=password)
+        login(self.request, user)
+        return super().form_valid(form)
 
 
 class ProfilePage(TemplateView):

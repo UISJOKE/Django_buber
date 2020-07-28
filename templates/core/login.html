@@ -11,8 +11,8 @@
     {% endif %}
     <form method="post">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="Логин">
-        <input type="password" name="password" placeholder="Пароль">
+        Username:<br>{{ form.username }}<br><br>
+        Password:<br>{{ form.password }}<br><br>
         <input type="submit" value="Войти">
     </form>
 
