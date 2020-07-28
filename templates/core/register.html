@@ -1,18 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/media/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/media/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/media/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/media/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/media/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/media/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/media/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/media/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/media/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/media/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/media/css/main.css">
+<!--===============================================================================================-->
 </head>
 <body>
-    <h1>Регистрация</h1>
-   <form action="" method="post">
-       {% csrf_token %}
-       Username:<br>{{ form.username }} <br><br>
-       E-mail:<br>{{form.email}}<br><br>
-       Password:<br>{{ form.password1 }}<br><br>
-       Re-enter password:<br>{{ form.password2 }}<br><br>
-    <input type="submit" value="Зарегистрировать">
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+				<form class="login100-form-btn">
+					<span class="login100-form-title p-b-32">
+						SignUp
+                    </span>
+                    <span class="txt1 p-b-11">
+						Username
+					</span>
+                    <div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
+                        <input class="input100" type="text" name="username">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <span class="txt1 p-b-11">
+						First name
+					</span>
+                    <div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
+                        <input class="input100" type="text" name="first_name">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <span class="txt1 p-b-11">
+						Last name
+					</span>
+                    <div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
+                        <input class="input100" type="text" name="last_name">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <span class="txt1 p-b-11">
+						E-mail
+					</span>
+                    <div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
+                        <input class="input100" type="email" name="email">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <span class="txt1 p-b-11">
+						Password
+                    </span>
+                    <div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+						<span class="btn-show-pass">
+							<i class="fa fa-eye"></i>
+						</span>
+                        <input class="input100" type="text" name="password1">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <span class="txt1 p-b-11">
+						Re-enter password
+                    </span>
+                    <div class="wrap-input100 validate-input m-b-12" data-validate = "Password is required">
+						<span class="btn-show-pass">
+							<i class="fa fa-eye"></i>
+						</span>
+                        <input class="input100" type="text" name="password2">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+							SignUp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
     </form>
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="/media/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/media/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/media/vendor/bootstrap/js/popper.js"></script>
+	<script src="/media/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/media/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/media/vendor/daterangepicker/moment.min.js"></script>
+	<script src="/media/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="/media/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="/media/js/main.js"></script>
+
 </body>
-</html>
