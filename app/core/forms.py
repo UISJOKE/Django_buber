@@ -1,14 +1,18 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, forms
 from django.contrib.auth import get_user_model
+from app.core.models import User
 
 
 class SignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=200)
-    last_name = forms.CharField(max_length=200)
+    GENDER_CHOICES = (('Male', 'Male'),
+                      ('Female', 'Female'))
+    first_name = forms.CharField(max_length=200, required=True)
+    last_name = forms.CharField(max_length=200, required=True)
+    male = forms.ChoiceField(choices=GENDER_CHOICES)
 
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'male', 'email', 'password1', 'password2')
 
 
 class LoginForm(AuthenticationForm):
