@@ -1,7 +1,7 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout, get_user_model
 from django.urls import reverse_lazy
 from .forms import SignUpForm, LoginForm
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, RedirectView
 
 
 class MainPageView(TemplateView):
@@ -30,6 +30,17 @@ class LoginView(FormView):
         user = authenticate(self.request, username=username, password=password)
         login(self.request, user)
         return super().form_valid(form)
+
+
+class LogoutView(RedirectView):
+    permanent = False
+    query_string = True
+    pattern_name = 'home'
+
+    def get_redirect_url(self, *args, **kwargs):
+        if get_user_model():
+            logout(self.request)
+        return super(LogoutView, self).get_redirect_url(*args, **kwargs)
 
 
 class ProfilePage(TemplateView):

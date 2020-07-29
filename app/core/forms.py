@@ -1,7 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, forms
 from django.contrib.auth import get_user_model
-from app.core.models import User
-
 
 class SignUpForm(UserCreationForm):
     GENDER_CHOICES = (('Male', 'Male'),

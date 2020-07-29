@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'address',
-    'vendor_files',
+    'avatar',
     'app.core',
 ]
 

@@ -6,7 +6,7 @@ class User(AbstractUser):
     GENDER_CHOICES = (('Male', 'Male'),
                       ('Female', 'Female'))
     bio = models.CharField(max_length=50, blank=True)
-    avatar = models.ImageField(upload_to='ProfilePicture', default='ProfilePicture/default.jpg', blank=True)
+    # avatar = models.ImageField(upload_to='ProfilePicture', default='ProfilePicture/default.jpg', blank=True)
     male = models.CharField(max_length=10, choices=GENDER_CHOICES)
     car = models.ManyToManyField('core.Car', related_name='drivers', blank=True)
 
