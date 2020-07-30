@@ -1,4 +1,3 @@
-{% load avatar_tags %}
 {% load static %}
 <head>
 	<title>Profile {{ user.username }}</title>
@@ -32,13 +31,8 @@
         {% csrf_token %}
     <div class="container content">
         <h2>{{ user.username }}</h2>
-
-        <div class="row">
-            <div class="col5">
-                    {% avatar user 250 %}<br>
-                <a href="{% url 'avatar_change' %}">Change your avatar</a><br>
-                <a href="{% url 'avatar_delete' %}">Delete your avatar</a>
-            </div><br>
+        <img src="{{ user.avatar.url}}" width="250" height="250">
+    </div>
             <div class="col" >
                 <dl class="row">
                     <dt class="col-sm-3 text-right">First name:<br></dt>
@@ -61,8 +55,6 @@
 
                 </dl>
             </div>
-        </div>
-    </div>
 	<script src="/media/signup_login/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="/media/signup_login/vendor/animsition/js/animsition.min.js"></script>

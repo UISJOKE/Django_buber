@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'address',
-    'avatar',
     'app.core',
 ]
 
@@ -108,7 +107,7 @@ USE_TZ = True
 # ]
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'static/'
+STATIC_ROOT = 'static'
 
 INTERNAL_IPS = [
     '127.0.0.1',

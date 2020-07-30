@@ -1,18 +1,20 @@
+from awesome_avatar.fields import AvatarField
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+
 
 
 class User(AbstractUser):
     GENDER_CHOICES = (('Male', 'Male'),
                       ('Female', 'Female'))
     bio = models.CharField(max_length=50, blank=True)
-    # avatar = models.ImageField(upload_to='ProfilePicture', default='ProfilePicture/default.jpg', blank=True)
+    avatar = models.ImageField(upload_to='ProfilePicture/', default='ProfilePicture/default.jpg', blank=True)
     male = models.CharField(max_length=10, choices=GENDER_CHOICES)
     car = models.ManyToManyField('core.Car', related_name='drivers', blank=True)
 
     def __str__(self):
         return self.username
-
 
 class Car(models.Model):
     car_model = models.ForeignKey('core.Model', on_delete=models.CASCADE, related_name='new_car')
