@@ -1,6 +1,9 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, forms
 from django.contrib.auth import get_user_model
 
+from app.core import models
+
+
 class SignUpForm(UserCreationForm):
     GENDER_CHOICES = (('Male', 'Male'),
                       ('Female', 'Female'))
@@ -16,3 +19,17 @@ class SignUpForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     def confirm_login_allowed(self, user):
         pass
+
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField(max_length=200)
+
+    class Meta:
+        model = models.User
+        fields = ['username', 'email', 'bio', 'car', 'male', 'first_name', 'last_name']
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = models.UserProfile
+        fields = ['avatar']

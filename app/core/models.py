@@ -1,20 +1,20 @@
-from awesome_avatar.fields import AvatarField
-from django.contrib.auth import get_user_model
-from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.db import models
+from PIL import Image
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class User(AbstractUser):
     GENDER_CHOICES = (('Male', 'Male'),
                       ('Female', 'Female'))
     bio = models.CharField(max_length=50, blank=True)
-    avatar = models.ImageField(upload_to='ProfilePicture/', default='ProfilePicture/default.jpg', blank=True)
     male = models.CharField(max_length=10, choices=GENDER_CHOICES)
-    car = models.ManyToManyField('core.Car', related_name='drivers', blank=True)
+    car = models.ForeignKey('core.Car', on_delete=models.CASCADE,related_name='drivers', blank=True, null=True)
 
     def __str__(self):
         return self.username
+
 
 class Car(models.Model):
     car_model = models.ForeignKey('core.Model', on_delete=models.CASCADE, related_name='new_car')
@@ -51,3 +51,27 @@ class CarNumber(models.Model):
 
     def __str__(self):
         return f'{self.number}{self.series}-{self.region.code}'
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(default='ProfilePicture/default.jpg', upload_to='ProfilePicture')
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
+
+    @receiver(post_save, sender=User)
+    def create_profile(sender, instance, created, **kwargs):
+        if created:
+            UserProfile.objects.create(user=instance)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        super().save()
+
+        img = Image.open(self.avatar.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.avatar.path)

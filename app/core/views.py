@@ -1,7 +1,11 @@
 from django.contrib.auth import login, authenticate, logout, get_user_model
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from .forms import SignUpForm, LoginForm
+from .forms import SignUpForm, LoginForm, UserUpdateForm, ProfileUpdateForm, AddCarForm
 from django.views.generic import TemplateView, FormView, RedirectView
+from django.contrib import messages
+from .models import Car
 
 
 class MainPageView(TemplateView):
@@ -43,5 +47,26 @@ class LogoutView(RedirectView):
         return super(LogoutView, self).get_redirect_url(*args, **kwargs)
 
 
-class ProfilePage(TemplateView):
-    template_name = "core/profile.html"
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.userprofile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.userprofile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'core/profile.html', context)

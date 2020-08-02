@@ -3,3 +3,4 @@ django-grappelli
 django-debug-toolbar
 Pillow
 django-avatar
+django-address
