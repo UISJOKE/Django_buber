@@ -2,7 +2,7 @@ from django.contrib.auth import login, authenticate, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from .forms import SignUpForm, LoginForm, UserUpdateForm, ProfileUpdateForm, AddCarForm
+from .forms import SignUpForm, LoginForm, UserUpdateForm, ProfileUpdateForm
 from django.views.generic import TemplateView, FormView, RedirectView
 from django.contrib import messages
 from .models import Car
