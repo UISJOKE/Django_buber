@@ -27,79 +27,21 @@
 <!--===============================================================================================-->
 </head>
 <body>
-<style>
-body{background:url(https://bootstraptema.ru/images/bg/bg-1.png)}
-
-main {
- background-color: #f2f2f2;
- padding: 20px;
--webkit-border-radius: 4px;
- -moz-border-radius: 4px;
- border-radius: 4px;
- border-bottom: 4px solid #ddd;
-}
-#real-estates-detail #author img {
- -webkit-border-radius: 100%;
- -moz-border-radius: 100%;
- border-radius: 100%;
- border: 5px solid #ecf0f1;
- margin-bottom: 10px;
-}
-#real-estates-detail .sosmed-author i{
- width: 30px;
- height: 30px;
- border: 2px solid #bdc3c7;
- color: #bdc3c7;
- padding-top: 6px;
- margin-top: 10px;
-}
-#real-estates-detail .slides li img {
- height: 450px;
-}
-</style>
-    {% block content %}
-        <div class="content-section">
-          <div class="media">
-            <div class="media-body" align="center">
-              <h2 class="account-heading">Profile {{ user.username }}</h2>
-                <img class="rounded-circle account-img" src="{{ user.userprofile.avatar.url }}" width="250" height="250" alt="">
-            </div>
-          </div>
-          <form method="POST" enctype="multipart/form-data">
-              <div align="center">
-                  {% csrf_token %}
-                  {{ p_form }}
-              </div>
+        <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
               <fieldset class="form-group">
-                  <legend class="border-bottom mb-4">PROFILE INFO</legend>
-                  Username:<br><br>
-                  <div class="input100">{{ u_form.username }}</div>
-                  E-mail:<br><br>
-                  <div class="input100">{{ u_form.email }}</div>
-                  First name:<br><br>
-                  <div class="input100 ">{{ u_form.first_name }}</div>
-                  Last name:<br><br>
-                  <div class="input100 ">{{ u_form.last_name }}</div>
-                  Male:<br><br>
-                  <div class="input100 ">{{ u_form.male }}</div>
-                  Car:<br><br>
-                  <div class="input100 ">
-                      {{ u_form.car }}
-                      <button>
-                            <a href="{% url 'add_car' %}" class="button">add car</a>
-                      </button>
-                  </div>>
-                  BIO:<br><br>
-                  <div class="input100">{{ u_form.bio }}</div>
+                  <legend class="border-bottom mb-4">Profile Info</legend>
+                        {{ car }}
 
+                  <button>
+                      <a href="{% url 'add_model_number' %}">add number and model</a>
+                  </button>
               </fieldset>
               <div class="form-group">
-                  <button class="btn btn-outline-info" type="submit">Update</button>
+                  <button class="btn btn-outline-info" type="submit">Add</button>
               </div>
           </form>
-        </div>
-    {% endblock content %}
-	<script src="/media/signup_login/vendor/jquery/jquery-3.2.1.min.js"></script>
+ 	<script src="/media/signup_login/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="/media/signup_login/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
@@ -115,10 +57,3 @@ main {
 <!--===============================================================================================-->
 	<script src="/media/signup_login/js/main.js"></script>
 </body>
-
-<link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
-<script src="https://bootstraptema.ru/plugins/2015/b-v3-3-6/bootstrap.min.js"></script>
-
-<br><br><br>

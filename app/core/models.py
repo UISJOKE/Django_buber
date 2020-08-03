@@ -8,7 +8,7 @@ from django.dispatch import receiver
 class User(AbstractUser):
     GENDER_CHOICES = (('Male', 'Male'),
                       ('Female', 'Female'))
-    bio = models.CharField(max_length=50, blank=True)
+    bio = models.CharField(max_length=500, blank=True)
     male = models.CharField(max_length=10, choices=GENDER_CHOICES)
     car = models.ForeignKey('core.Car', on_delete=models.CASCADE, related_name='drivers', blank=True, null=True)
 

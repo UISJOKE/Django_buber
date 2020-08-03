@@ -2,10 +2,10 @@ from django.contrib.auth import login, authenticate, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from .forms import SignUpForm, LoginForm, UserUpdateForm, ProfileUpdateForm
+from .forms import SignUpForm, LoginForm, UserUpdateForm, ProfileUpdateForm, AddCarForm, \
+    AddCarNumberForm, AddCarModelForm
 from django.views.generic import TemplateView, FormView, RedirectView
 from django.contrib import messages
-from .models import Car
 
 
 class MainPageView(TemplateView):
@@ -70,3 +70,45 @@ def profile(request):
     }
 
     return render(request, 'core/profile.html', context)
+
+
+@login_required
+def number_model(request):
+    if request.method == 'POST':
+        number = AddCarNumberForm(request.POST)
+        model = AddCarModelForm(request.POST)
+
+        if number.is_valid() and model.is_valid():
+            number.save()
+            model.save()
+            messages.success(request, f'Number and model of car has been add!')
+            return redirect('add_car')
+
+    else:
+        number = AddCarNumberForm()
+        model = AddCarModelForm()
+
+        context = {
+            'number': number,
+            'model': model
+        }
+        return render(request, 'core/add_model_number.html', context)
+
+
+@login_required
+def car(request):
+    if request.method == 'POST':
+        auto = AddCarForm(request.POST)
+
+        if auto.is_valid():
+            auto.save()
+            messages.success(request, f'Car has been add!')
+            return redirect('profile')
+
+    else:
+        auto = AddCarForm()
+
+        context = {
+            'car': auto
+        }
+        return render(request, 'core/add_car.html', context)

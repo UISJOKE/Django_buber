@@ -22,7 +22,7 @@ class LoginForm(AuthenticationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField(max_length=200)
+    bio = forms.Textarea()
 
     class Meta:
         model = models.User
@@ -33,3 +33,21 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = models.UserProfile
         fields = ['avatar']
+
+
+class AddCarForm(forms.ModelForm):
+    class Meta:
+        model = models.Car
+        fields = ('car_number', 'car_type', 'car_model')
+
+
+class AddCarNumberForm(forms.ModelForm):
+    class Meta:
+        model = models.CarNumber
+        fields = ('number', 'series', 'region')
+
+
+class AddCarModelForm(forms.ModelForm):
+    class Meta:
+        model = models.Model
+        fields = ('car_brand', 'car_model')
