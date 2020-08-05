@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate
 
 from app.core import models
 
@@ -26,13 +26,7 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = models.User
-        fields = ['username', 'email', 'bio', 'car', 'male', 'first_name', 'last_name']
-
-
-class ProfileUpdateForm(forms.ModelForm):
-    class Meta:
-        model = models.UserProfile
-        fields = ['avatar']
+        fields = ['avatar', 'username', 'email', 'bio', 'male', 'first_name', 'last_name']
 
 
 class AddCarForm(forms.ModelForm):

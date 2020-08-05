@@ -1,8 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from PIL import Image
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 
 class User(AbstractUser):
@@ -10,13 +9,25 @@ class User(AbstractUser):
                       ('Female', 'Female'))
     bio = models.CharField(max_length=500, blank=True)
     male = models.CharField(max_length=10, choices=GENDER_CHOICES)
-    car = models.ForeignKey('core.Car', on_delete=models.CASCADE, related_name='drivers', blank=True, null=True)
+    avatar = models.ImageField(default='ProfilePicture/city3.jpg', upload_to='ProfilePicture/')
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        super().save()
+
+        img = Image.open(self.avatar.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.avatar.path)
 
     def __str__(self):
         return self.username
 
 
 class Car(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='new_car', default=User)
     car_model = models.ForeignKey('core.Model', on_delete=models.CASCADE, related_name='new_car')
     car_type = models.ForeignKey('core.Type', on_delete=models.CASCADE, related_name='new_car')
     car_number = models.ForeignKey('core.CarNumber', on_delete=models.CASCADE, related_name='new_car')
@@ -52,26 +63,3 @@ class CarNumber(models.Model):
     def __str__(self):
         return f'{self.number}{self.series}-{self.region.code}'
 
-
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(default='ProfilePicture/default.jpg', upload_to='ProfilePicture')
-
-    def __str__(self):
-        return f'{self.user.username} Profile'
-
-    @receiver(post_save, sender=User)
-    def create_profile(sender, instance, created, **kwargs):
-        if created:
-            UserProfile.objects.create(user=instance)
-
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        super().save()
-
-        img = Image.open(self.avatar.path)
-
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.avatar.path)

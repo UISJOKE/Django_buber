@@ -5,6 +5,7 @@ Django==3.0.8
 django-address==0.2.4
 django-appconf==1.0.4
 django-avatar==5.0.0
+django-crispy-forms==1.9.2
 django-debug-toolbar==2.2
 django-grappelli==2.14.2
 django-photologue==3.12

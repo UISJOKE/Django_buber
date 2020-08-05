@@ -1,11 +1,11 @@
 from django.contrib.auth import login, authenticate, logout, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
-from .forms import SignUpForm, LoginForm, UserUpdateForm, ProfileUpdateForm, AddCarForm, \
-    AddCarNumberForm, AddCarModelForm
-from django.views.generic import TemplateView, FormView, RedirectView
+from .forms import SignUpForm, LoginForm, UserUpdateForm, AddCarForm, AddCarNumberForm, AddCarModelForm
+from django.views.generic import TemplateView, FormView, RedirectView, UpdateView
 from django.contrib import messages
+from .models import User
 
 
 class MainPageView(TemplateView):
@@ -47,29 +47,17 @@ class LogoutView(RedirectView):
         return super(LogoutView, self).get_redirect_url(*args, **kwargs)
 
 
-@login_required
-def profile(request):
-    if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST,
-                                   request.FILES,
-                                   instance=request.user.userprofile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return redirect('profile')
 
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.userprofile)
 
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
+class ProfileUpdateView(UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    template_name = 'core/profile.html'
+    success_url = reverse_lazy('profile')
 
-    return render(request, 'core/profile.html', context)
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get(self.pk_url_kwarg, None)
+        return get_object_or_404(User, pk=pk)
 
 
 @login_required
@@ -112,3 +100,13 @@ def car(request):
             'car': auto
         }
         return render(request, 'core/add_car.html', context)
+
+# class CarUpdateView(UpdateView):
+#     model = Car
+#     form_class = AddCarForm
+#     template_name = 'core/add_car.html'
+#     success_url = reverse('profile')
+#
+#     def get_object(self, queryset=None):
+#         pk = self.kwargs.get(self.pk_url_kwarg, None)
+#         return get_object_or_404(UserProfile, pk=pk)

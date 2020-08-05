@@ -62,35 +62,36 @@ main {
           <div class="media">
             <div class="media-body" align="center">
               <h2 class="account-heading">Profile {{ user.username }}</h2>
-                <img class="rounded-circle account-img" src="{{ user.userprofile.avatar.url }}" width="250" height="250" alt="">
+                <img class="rounded-circle account-img" src="{{ user.avatar.url }}" width="250" height="250" alt="">
             </div>
           </div>
           <form method="POST" enctype="multipart/form-data">
+{#              {% crispy form %}#}
+              {% csrf_token %}
               <div align="center">
-                  {% csrf_token %}
-                  {{ p_form }}
+                  {{ form.avatar }}
               </div>
               <fieldset class="form-group">
                   <legend class="border-bottom mb-4">PROFILE INFO</legend>
                   Username:<br><br>
-                  <div class="input100">{{ u_form.username }}</div>
+                  <div class="input100">{{ form.username}}</div>
                   E-mail:<br><br>
-                  <div class="input100">{{ u_form.email }}</div>
+                  <div class="input100" >{{ form.email}}</div>
                   First name:<br><br>
-                  <div class="input100 ">{{ u_form.first_name }}</div>
+                  <div class="input100 ">{{ form.first_name }}</div>
                   Last name:<br><br>
-                  <div class="input100 ">{{ u_form.last_name }}</div>
+                  <div class="input100 ">{{ form.last_name }}</div>
                   Male:<br><br>
-                  <div class="input100 ">{{ u_form.male }}</div>
+                  <div class="input100 ">{{ form.male }}</div>
                   Car:<br><br>
                   <div class="input100 ">
-                      {{ u_form.car }}
+                      {{ form.car }}
                       <button>
                             <a href="{% url 'add_car' %}" class="button">add car</a>
                       </button>
                   </div>>
                   BIO:<br><br>
-                  <div class="input100">{{ u_form.bio }}</div>
+                  <div class="input100">{{ form.bio }}</div>
 
               </fieldset>
               <div class="form-group">
