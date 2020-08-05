@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .forms import SignUpForm, LoginForm, UserUpdateForm, AddCarForm, AddCarNumberForm, AddCarModelForm
 from django.views.generic import TemplateView, FormView, RedirectView, UpdateView
 from django.contrib import messages
@@ -26,7 +26,7 @@ class MyRegisterFormView(FormView):
 class LoginView(FormView):
     template_name = "core/login.html"
     form_class = LoginForm
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         username = form.cleaned_data['username']
@@ -53,11 +53,14 @@ class ProfileUpdateView(UpdateView):
     model = User
     form_class = UserUpdateForm
     template_name = 'core/profile.html'
-    success_url = reverse_lazy('profile')
 
     def get_object(self, queryset=None):
         pk = self.kwargs.get(self.pk_url_kwarg, None)
         return get_object_or_404(User, pk=pk)
+
+    def get_success_url(self):
+        pk = self.kwargs.get(self.pk_url_kwarg, None)
+        return reverse('profile', kwargs={'pk': pk})
 
 
 @login_required
