@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from PIL import Image
-from django.urls import reverse
 
 
 class User(AbstractUser):
@@ -11,6 +10,7 @@ class User(AbstractUser):
     bio = models.CharField(max_length=500, blank=True)
     male = models.CharField(max_length=10, choices=GENDER_CHOICES)
     avatar = models.ImageField(default='ProfilePicture/city3.jpg', upload_to='ProfilePicture/')
+    # car = models.OneToOneField('core.Car', on_delete=models.CASCADE, null=True)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -28,10 +28,11 @@ class User(AbstractUser):
 
 
 class Car(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='new_car', default=User)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='new_car', null=True)
     car_model = models.ForeignKey('core.Model', on_delete=models.CASCADE, related_name='new_car')
     car_type = models.ForeignKey('core.Type', on_delete=models.CASCADE, related_name='new_car')
     car_number = models.ForeignKey('core.CarNumber', on_delete=models.CASCADE, related_name='new_car')
+
 
     def __str__(self):
         return f'{self.car_number}:{self.car_model}({self.car_type})'

@@ -30,9 +30,8 @@
         <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               <fieldset class="form-group">
-                  <legend class="border-bottom mb-4">Profile Info</legend>
-                  {{ number }}
-                  {{ model }}
+                  <legend class="border-bottom mb-4">Add {{user.username}} car number</legend>
+                  {{ form.as_p }}
               </fieldset>
               <div class="form-group">
                   <button class="btn btn-outline-info" type="submit">Add</button>
