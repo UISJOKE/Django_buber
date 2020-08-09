@@ -84,8 +84,13 @@ main {
                   <div class="input100 ">{{ form.male }}</div>
                   Car:<br><br>
                   <div class="input100 ">
+                      {%  if request.user == user %}
+                          {% for car in cars %}
+                              {{ car }}
+                          {% endfor %}
+                      {% endif %}
                       <button>
-                            <a href="{% url 'add_car' pk=user.pk %}" class="button">add car</a>
+                            <a href="{% url 'add_car' %}" class="button">add car</a>
                       </button>
                   </div>>
                   BIO:<br><br>

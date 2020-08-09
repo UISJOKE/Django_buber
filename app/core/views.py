@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate, logout, get_user_model
 from django.urls import reverse_lazy, reverse
 from .forms import SignUpForm, LoginForm, UserUpdateForm, AddCarForm, AddCarNumberForm, AddCarModelForm
-from django.views.generic import TemplateView, FormView, RedirectView, UpdateView,CreateView
+from django.views.generic import TemplateView, FormView, RedirectView, UpdateView, CreateView, DetailView
 from .models import User, CarNumber, Model, Car
 
 
@@ -43,7 +43,7 @@ class LogoutView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         if get_user_model():
             logout(self.request)
-        return super(LogoutView, self).get_redirect_url(*args, **kwargs)
+        return super().get_redirect_url(*args, **kwargs)
 
 
 class ProfileUpdateView(UpdateView):
@@ -51,8 +51,17 @@ class ProfileUpdateView(UpdateView):
     form_class = UserUpdateForm
     template_name = 'core/profile.html'
 
-    def get_success_url(self):
-        return reverse('profile', kwargs={'pk': self.request.user.id})
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        kwargs['cars'] = Car.objects.filter(user=self.request.user)
+        return super().get_context_data(**kwargs)
+
+
+class ProfileDetailView(DetailView):
+    model = User
+    template_name = 'core/detail_profile.html'
 
 
 class NumberUpdateView(CreateView):
@@ -75,9 +84,12 @@ class ModelUpdateView(CreateView):
 
 class CarUpdateView(CreateView):
     model = Car
-    form_class = AddCarForm
+    fields = '__all__'
     template_name = 'core/add_car.html'
 
     def get_success_url(self):
         return reverse('profile', kwargs={'pk': self.request.user.id})
 
+    def form_valid(self, form):
+        User = form.save(self.request.user)
+        return super().form_valid(User)

@@ -35,7 +35,7 @@
                       <label>Car number:</label>
                       {{ form.car_number }}
                        <button>
-                            <a href="{% url 'add_number' pk=user.pk%}">add number</a>
+                            <a href="{% url 'add_number' %}">add number</a>
                         </button>
                   </div><br>
                   <div>
@@ -46,7 +46,7 @@
                       <label>Car model:</label>
                       {{ form.car_model }}
                        <button>
-                            <a href="{% url 'add_model' pk=user.pk%}">add model</a>
+                            <a href="{% url 'add_model' %}">add model</a>
                         </button>
                   </div><br>
                   <div>

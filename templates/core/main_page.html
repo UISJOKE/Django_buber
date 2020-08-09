@@ -28,7 +28,7 @@
 <body>
         {% if user.is_authenticated %}
             <button>
-                <a href="{% url 'profile' pk=user.pk%}">{{ user.username }}</a>
+                <a href="{% url 'profile' %}">{{ user.username }}</a>
             </button>
             <a href="{% url 'logout' %}">Выход</a>
         {% else %}

@@ -10,7 +10,6 @@ class User(AbstractUser):
     bio = models.CharField(max_length=500, blank=True)
     male = models.CharField(max_length=10, choices=GENDER_CHOICES)
     avatar = models.ImageField(default='ProfilePicture/city3.jpg', upload_to='ProfilePicture/')
-    # car = models.OneToOneField('core.Car', on_delete=models.CASCADE, null=True)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -32,7 +31,6 @@ class Car(models.Model):
     car_model = models.ForeignKey('core.Model', on_delete=models.CASCADE, related_name='new_car')
     car_type = models.ForeignKey('core.Type', on_delete=models.CASCADE, related_name='new_car')
     car_number = models.ForeignKey('core.CarNumber', on_delete=models.CASCADE, related_name='new_car')
-
 
     def __str__(self):
         return f'{self.car_number}:{self.car_model}({self.car_type})'
@@ -64,4 +62,3 @@ class CarNumber(models.Model):
 
     def __str__(self):
         return f'{self.number}{self.series}-{self.region.code}'
-
