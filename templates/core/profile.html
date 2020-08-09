@@ -1,63 +1,8 @@
-{% load static %}
-<head>
-	<title>Profile {{ user.username }}</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="/media/signup_login/images/icons/favicon.ico"/>
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/media/signup_login/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/media/signup_login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/media/signup_login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/media/signup_login/vendor/animate/animate.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/media/signup_login/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/media/signup_login/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/media/signup_login/vendor/select2/select2.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/media/signup_login/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="/media/signup_login/css/util.css">
-	<link rel="stylesheet" type="text/css" href="/media/signup_login/css/main.css">
-<!--===============================================================================================-->
-</head>
-<body>
+{% extends 'core/base.html' %}
+{% block content %}
 <style>
 body{background:url(https://bootstraptema.ru/images/bg/bg-1.png)}
-
-main {
- background-color: #f2f2f2;
- padding: 20px;
--webkit-border-radius: 4px;
- -moz-border-radius: 4px;
- border-radius: 4px;
- border-bottom: 4px solid #ddd;
-}
-#real-estates-detail #author img {
- -webkit-border-radius: 100%;
- -moz-border-radius: 100%;
- border-radius: 100%;
- border: 5px solid #ecf0f1;
- margin-bottom: 10px;
-}
-#real-estates-detail .sosmed-author i{
- width: 30px;
- height: 30px;
- border: 2px solid #bdc3c7;
- color: #bdc3c7;
- padding-top: 6px;
- margin-top: 10px;
-}
-#real-estates-detail .slides li img {
- height: 450px;
-}
 </style>
-    {% block content %}
         <div class="content-section">
           <div class="media">
             <div class="media-body" align="center">
@@ -102,27 +47,5 @@ main {
               </div>
           </form>
         </div>
-    {% endblock content %}
 	<script src="/media/signup_login/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="/media/signup_login/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="/media/signup_login/vendor/bootstrap/js/popper.js"></script>
-	<script src="/media/signup_login/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="/media/signup_login/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="/media/signup_login/vendor/daterangepicker/moment.min.js"></script>
-	<script src="/media/signup_login/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="/media/signup_login/vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-	<script src="/media/signup_login/js/main.js"></script>
-</body>
-
-<link rel="stylesheet" href="https://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
-<script src="https://bootstraptema.ru/plugins/2015/b-v3-3-6/bootstrap.min.js"></script>
-
-<br><br><br>
+{% endblock %}

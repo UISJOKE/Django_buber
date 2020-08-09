@@ -45,3 +45,4 @@ class AddCarModelForm(forms.ModelForm):
     class Meta:
         model = models.Model
         fields = ('car_brand', 'car_model')
+

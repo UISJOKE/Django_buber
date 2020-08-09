@@ -23,6 +23,7 @@ class MyRegisterFormView(FormView):
 class LoginView(FormView):
     template_name = "core/login.html"
     form_class = LoginForm
+    success_url = reverse_lazy('profile')
 
     def form_valid(self, form):
         username = form.cleaned_data['username']
@@ -30,9 +31,6 @@ class LoginView(FormView):
         user = authenticate(self.request, username=username, password=password)
         login(self.request, user)
         return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('profile', kwargs={'pk': self.request.user.id})
 
 
 class LogoutView(RedirectView):
@@ -68,27 +66,21 @@ class NumberUpdateView(CreateView):
     model = CarNumber
     form_class = AddCarNumberForm
     template_name = 'core/add_number.html'
-
-    def get_success_url(self):
-        return reverse('add_car', kwargs={'pk': self.request.user.id})
+    success_url = reverse_lazy('add_car')
 
 
 class ModelUpdateView(CreateView):
     model = Model
     form_class = AddCarModelForm
     template_name = 'core/add_model.html'
-
-    def get_success_url(self):
-        return reverse('add_car', kwargs={'pk': self.request.user.id})
+    success_url = reverse_lazy('add_car')
 
 
 class CarUpdateView(CreateView):
     model = Car
     fields = '__all__'
     template_name = 'core/add_car.html'
-
-    def get_success_url(self):
-        return reverse('profile', kwargs={'pk': self.request.user.id})
+    success_url = reverse_lazy('profile')
 
     def form_valid(self, form):
         User = form.save(self.request.user)

@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% block content %}
+	<title>Profile {{ user.username }}</title>
+<style>
+body{background:url(https://bootstraptema.ru/images/bg/bg-1.png)}
+</style>
+        <div class="content-section">
+          <div class="media">
+            <div class="media-body" align="center">
+              <h2 class="account-heading">Profile {{ user.username }}</h2>
+                <img class="rounded-circle account-img" src="{{ user.avatar.url }}" width="250" height="250" alt="">
+            </div>
+          </div>
+              <fieldset class="form-group">
+                  <legend class="border-bottom mb-4">PROFILE INFO</legend>
+                  Username:<br><br>
+                  <div>{{ user.username}}</div>
+                  E-mail:<br><br>
+                  <div>{{ user.email}}</div>
+                  First name:<br><br>
+                  <div>{{ user.first_name }}</div>
+                  Last name:<br><br>
+                  <div>{{ user.last_name }}</div>
+                  Male:<br><br>
+                  <div>{{ user.male }}</div>
+                  BIO:<br><br>
+                  <div >{{ user.bio }}</div>
+              </fieldset>
+        </div>
+{% endblock %}
+
