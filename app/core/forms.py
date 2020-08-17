@@ -26,7 +26,7 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = models.User
-        fields = ['avatar', 'username', 'email', 'bio', 'male', 'first_name', 'last_name']
+        fields = ('avatar', 'username', 'email', 'bio', 'male', 'first_name', 'last_name')
 
 
 class AddCarForm(forms.ModelForm):

@@ -1,5 +1,5 @@
 from django.contrib.auth import login, authenticate, logout, get_user_model
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from .forms import SignUpForm, LoginForm, UserUpdateForm, AddCarForm, AddCarNumberForm, AddCarModelForm
 from django.views.generic import TemplateView, FormView, RedirectView, UpdateView, CreateView, DetailView
 from .models import User, CarNumber, Model, Car

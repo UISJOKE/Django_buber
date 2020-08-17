@@ -7,25 +7,31 @@ body{background:url(https://bootstraptema.ru/images/bg/bg-1.png)}
         <div class="content-section">
           <div class="media">
             <div class="media-body" align="center">
-              <h2 class="account-heading">Profile {{ user.username }}</h2>
+              <h2 class="account-heading font-weight-bold">Profile {{ user.username }}</h2>
                 <img class="rounded-circle account-img" src="{{ user.avatar.url }}" width="250" height="250" alt="">
             </div>
           </div>
+            {% if request.user != user %}
               <fieldset class="form-group">
-                  <legend class="border-bottom mb-4">PROFILE INFO</legend>
+                  <legend class="border-bottom m-b-36 font-weight-bold">PROFILE INFO</legend>
                   Username:<br><br>
-                  <div>{{ user.username}}</div>
+                  <div class="font-weight-bold">{{ user.username }}</div><br>
                   E-mail:<br><br>
-                  <div>{{ user.email}}</div>
+                  <div class="font-weight-bold">{{ user.email}}</div><br>
                   First name:<br><br>
-                  <div>{{ user.first_name }}</div>
+                  <div class="font-weight-bold">{{ user.first_name }}</div><br>
                   Last name:<br><br>
-                  <div>{{ user.last_name }}</div>
+                  <div class="font-weight-bold">{{ user.last_name }}</div><br>
                   Male:<br><br>
-                  <div>{{ user.male }}</div>
+                  <div class="font-weight-bold">{{ user.male }}</div><br>
                   BIO:<br><br>
-                  <div >{{ user.bio }}</div>
+                  <div class="font-weight-bold">{{ user.bio }}</div><br>
               </fieldset>
+            {% else %}
+                <head>
+                    <meta http-equiv="refresh" content="0; url=/core/profile/" />
+                </head>
+            {% endif %}
         </div>
 {% endblock %}
 
